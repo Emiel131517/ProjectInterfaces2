@@ -9,13 +9,12 @@ public class Player : MonoBehaviour
     private int bullets = 15;
     private int score = 0;
 
-    private Camera playerCam;
     public Transform playerModel;
     public Transform target;
 
     void Start()
     {
-        playerCam = GameObject.Find("Main Camera").GetComponent<Camera>();
+
     }
 
     // Update is called once per frame
@@ -26,6 +25,10 @@ public class Player : MonoBehaviour
 
         Movement();
         StrafeH(playerModel, h);
+        if (Input.GetKey(KeyCode.Mouse0))
+        {
+            Shoot();
+        }
         //RotateUpDown(playerModel, v);
     }
 
@@ -60,6 +63,22 @@ public class Player : MonoBehaviour
     {
         Vector3 eulerAngles = player.localEulerAngles;
         player.localEulerAngles = new Vector3(Mathf.LerpAngle(eulerAngles.x, -axisV * 25, 0.25f), eulerAngles.y, eulerAngles.z);
+    }
+
+    public void Shoot()
+    {
+        if (bullets > 0)
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, transform.forward, out hit, 20))
+            {
+                if (hit.transform.CompareTag("Destructable"))
+                {
+                    Destroy(hit.transform.gameObject);
+                    bullets--;
+                }
+            }
+        }
     }
 
     void LateUpdate()
