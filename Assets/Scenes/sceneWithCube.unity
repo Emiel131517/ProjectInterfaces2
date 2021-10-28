@@ -580,7 +580,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonPrefab: {fileID: 154796, guid: 17609f3f874367843b54103e2995835f, type: 3}
-  menuPanel: {fileID: 1920874138}
+  menuPanel: {fileID: 2040253880}
   StatusText: {fileID: 2006827292}
   ActionButton: {fileID: 1710066531}
   StateName: {fileID: 43718910}
