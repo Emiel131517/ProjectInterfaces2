@@ -29,7 +29,7 @@ public class RotateCube : MonoBehaviour {
         if (actValues.Count >= 4)
         { // (In this case) if a valid measurement
             Quaternion newRot = new Quaternion(actValues[0], -actValues[2], actValues[1], actValues[3]);    // Gidi: since MPU9150 is righthanded and Unity left-handed
-            this.transform.rotation = newRot * origRot; 
+            this.transform.rotation = Quaternion.Euler(new Vector3(newRot.eulerAngles.x, 0, newRot.eulerAngles.z));
         }
 
     }
