@@ -13,7 +13,12 @@ public class RotateCube : MonoBehaviour {
     // to receive values from the Arduino
     private List<int> actValues;
 
+    public float rollAngle;
+    public float velocity = 1;
+
     private Quaternion origRot;
+
+    float h;
 
     // Use this for initialization
     void Start () {
@@ -30,6 +35,22 @@ public class RotateCube : MonoBehaviour {
         { // (In this case) if a valid measurement
             Quaternion newRot = new Quaternion(actValues[0], -actValues[2], actValues[1], actValues[3]);    // Gidi: since MPU9150 is righthanded and Unity left-handed
             this.transform.rotation = this.transform.parent.rotation * Quaternion.Euler(new Vector3(-newRot.eulerAngles.x, 0, -newRot.eulerAngles.z));
+            rollAngle = newRot.eulerAngles.z;
+            float tempAngle = newRot.eulerAngles.z;
+            if (tempAngle >= 180)
+            {
+                tempAngle = tempAngle - 360;
+            }
+            if (tempAngle >= 90)
+            {
+                tempAngle = 90;
+            }
+            if (tempAngle < -90)
+            {
+                tempAngle = -90;
+            }
+            rollAngle = tempAngle;
+            transform.Translate(Vector3.right * rollAngle * velocity);
         }
 
     }
