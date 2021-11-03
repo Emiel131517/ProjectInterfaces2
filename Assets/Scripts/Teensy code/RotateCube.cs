@@ -13,12 +13,11 @@ public class RotateCube : MonoBehaviour {
     // to receive values from the Arduino
     private List<int> actValues;
 
-    public float rollAngle;
-    public float velocity = 1;
+    private float rollAngle;
+    private float yawAngle;
+    private float velocity = 0.001f;
 
     private Quaternion origRot;
-
-    float h;
 
     // Use this for initialization
     void Start () {
@@ -36,21 +35,34 @@ public class RotateCube : MonoBehaviour {
             Quaternion newRot = new Quaternion(actValues[0], -actValues[2], actValues[1], actValues[3]);    // Gidi: since MPU9150 is righthanded and Unity left-handed
             this.transform.rotation = this.transform.parent.rotation * Quaternion.Euler(new Vector3(-newRot.eulerAngles.x, 0, -newRot.eulerAngles.z));
             rollAngle = newRot.eulerAngles.z;
-            float tempAngle = newRot.eulerAngles.z;
-            if (tempAngle >= 180)
+            if (rollAngle >= 180)
             {
-                tempAngle = tempAngle - 360;
+                rollAngle = rollAngle - 360;
             }
-            if (tempAngle >= 90)
+            if (rollAngle >= 90)
             {
-                tempAngle = 90;
+                rollAngle = 90;
             }
-            if (tempAngle < -90)
+            if (rollAngle < -90)
             {
-                tempAngle = -90;
+                rollAngle = -90;
             }
-            rollAngle = tempAngle;
-            transform.Translate(Vector3.right * rollAngle * velocity);
+            transform.Translate(Vector3.right * rollAngle * velocity, Camera.main.transform);
+            
+            yawAngle = newRot.eulerAngles.x;
+            if (yawAngle >= 180)
+            {
+                yawAngle = yawAngle - 360;
+            }
+            if (yawAngle >= 90)
+            {
+                yawAngle = 90;
+            }
+            if (yawAngle < -90)
+            {
+                yawAngle = -90;
+            }
+            transform.Translate(Vector3.up * yawAngle * velocity, Camera.main.transform);
         }
 
     }
