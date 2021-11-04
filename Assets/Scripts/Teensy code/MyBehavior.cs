@@ -19,7 +19,7 @@ public class MyBehavior : MonoBehaviour
     // example commands
     private const string SET_LED_ON = "x";
     private const string SET_LED_OFF = "y";
-    private bool ledStatus = false; 
+    public bool ledStatus = false; 
 
     // to receive values from the Arduino
     private List<int> actValues;    

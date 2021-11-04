@@ -12,6 +12,8 @@ public class Player : MonoBehaviour
 
     [SerializeField] GameObject objectWithSerialConnect;
     private SerialConnect myScript;
+    [SerializeField]
+    private GameObject myBehaviorObject;
     private List<int> actValues;
 
     private float rollAngle;
@@ -21,6 +23,7 @@ public class Player : MonoBehaviour
     {
         _score = GameObject.Find("ScoreText").GetComponent<Highscore>();
         myScript = objectWithSerialConnect.GetComponent<SerialConnect>();
+        myBehaviorObject = GameObject.Find("Canvas").GetComponent<MyBehavior>();
         deathCam = GameObject.Find("DeathCam");
 
         deathCam.SetActive(false);
@@ -81,6 +84,7 @@ public class Player : MonoBehaviour
         if (bullets > 0)
         {
             bullets--;
+            myBehavior.ledStatus = true;
             RaycastHit hit;
             if (Physics.Raycast(transform.position, transform.forward, out hit, 20))
             {

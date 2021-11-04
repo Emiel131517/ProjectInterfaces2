@@ -2053,6 +2053,7 @@ MonoBehaviour:
   bullets: 15
   playerIsAlive: 1
   objectWithSerialConnect: {fileID: 1868806416}
+  myBehavior: {fileID: 0}
 --- !u!1 &1438786325
 GameObject:
   m_ObjectHideFlags: 0
@@ -2635,6 +2636,7 @@ MonoBehaviour:
   ArduinoValues: {fileID: 987026483}
   objectWithSerialConnect: {fileID: 1868806416}
   ActionButton: {fileID: 213725011}
+  ledStatus: 0
 --- !u!114 &1868806418
 MonoBehaviour:
   m_ObjectHideFlags: 0
