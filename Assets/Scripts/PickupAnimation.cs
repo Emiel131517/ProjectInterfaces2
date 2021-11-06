@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PickupAnimation : MonoBehaviour
 {
+    public static AudioSource pickupSound;
     [SerializeField]
     private float amplitude = 1;
     [SerializeField]
@@ -19,6 +20,7 @@ public class PickupAnimation : MonoBehaviour
     void Start()
     {
         startPosition = transform.position;
+        pickupSound = GameObject.Find("PickupSound").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame

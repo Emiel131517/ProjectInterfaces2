@@ -2,18 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
     public int bullets = 15;
-    private Highscore _score;
-    public bool playerIsAlive = true;
-    private GameObject deathCam;
+    public static bool playerIsAlive = true;
 
     [SerializeField] GameObject objectWithSerialConnect;
     private SerialConnect myScript;
     [SerializeField]
-    private GameObject myBehaviorObject;
+    //private GameObject myBehaviorObject;
     private List<int> actValues;
 
     private float rollAngle;
@@ -21,12 +20,7 @@ public class Player : MonoBehaviour
     private float velocity = 0.001f;
     void Start()
     {
-        _score = GameObject.Find("ScoreText").GetComponent<Highscore>();
         myScript = objectWithSerialConnect.GetComponent<SerialConnect>();
-        myBehaviorObject = GameObject.Find("Canvas").GetComponent<MyBehavior>();
-        deathCam = GameObject.Find("DeathCam");
-
-        deathCam.SetActive(false);
     }
 
     // Update is called once per frame
@@ -84,14 +78,13 @@ public class Player : MonoBehaviour
         if (bullets > 0)
         {
             bullets--;
-            myBehavior.ledStatus = true;
             RaycastHit hit;
             if (Physics.Raycast(transform.position, transform.forward, out hit, 20))
             {
                 if (hit.transform.CompareTag("Destructable"))
                 {
                     Destroy(hit.transform.gameObject);
-                    _score.score += 10;
+                    Highscore.score += 10;
                 }
             }
         }
@@ -108,7 +101,7 @@ public class Player : MonoBehaviour
     {
         Destroy(gameObject);
         playerIsAlive = false;
-        deathCam.SetActive(true);
+        SceneManager.LoadScene("End Menu");
 
     }
     private void OnTriggerEnter(Collider other)
@@ -116,6 +109,7 @@ public class Player : MonoBehaviour
         if (other.gameObject.CompareTag("Bullets"))
         {
             bullets += 5;
+            PickupAnimation.pickupSound.Play();
             Destroy(other.gameObject);
         }
     }

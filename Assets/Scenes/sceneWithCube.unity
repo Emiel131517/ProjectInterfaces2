@@ -619,6 +619,7 @@ MonoBehaviour:
   ArduinoValues: {fileID: 1569217459}
   objectWithSerialConnect: {fileID: 335566586}
   ActionButton: {fileID: 304246777}
+  ledStatus: 0
 --- !u!1 &444244802
 GameObject:
   m_ObjectHideFlags: 0
