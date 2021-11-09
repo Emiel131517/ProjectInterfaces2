@@ -10,7 +10,7 @@ public class MainMenu : MonoBehaviour
     private void Start()
     {
         panel = GameObject.Find("PanelBar");
-
+        Player.score = 0;
         panel.SetActive(false);
     }
 

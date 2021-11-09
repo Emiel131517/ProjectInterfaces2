@@ -16,7 +16,7 @@ public class DeathText : MonoBehaviour
     {
         if (Player.playerIsAlive == false)
         {
-            deathText.text = "Oh no, you crashed!\nYour score is: " + Mathf.Round(Highscore.score);
+            deathText.text = "Oh no, you crashed!\nYour score is: " + Mathf.Round(Player.score);
         }
     }
 }

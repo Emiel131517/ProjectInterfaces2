@@ -8,6 +8,7 @@ public class EndMenu : MonoBehaviour
     public void Resart()
     {
         SceneManager.LoadScene("Main");
+        Player.score = 0;
     }
     public void MainMenu()
     {

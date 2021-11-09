@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
 {
     public int bullets = 15;
     public static bool playerIsAlive = true;
+    public static float score;
+    private float scoreAddPerSec = 5;
 
     [SerializeField] GameObject objectWithSerialConnect;
     private SerialConnect myScript;
@@ -27,10 +29,11 @@ public class Player : MonoBehaviour
     void Update()
     {
         Movement();
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.X))
         {
             Shoot();
         }
+        score += scoreAddPerSec * Time.deltaTime;
     }
 
     public void Movement()
@@ -84,7 +87,7 @@ public class Player : MonoBehaviour
                 if (hit.transform.CompareTag("Destructable"))
                 {
                     Destroy(hit.transform.gameObject);
-                    Highscore.score += 10;
+                    score += 10;
                 }
             }
         }
